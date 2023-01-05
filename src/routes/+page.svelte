@@ -1,16 +1,10 @@
 <script>
 	import Nav from '$lib/Nav/Nav.svelte';
 	import { open } from '$lib/Nav/stores.js';
-
-	let navOpen;
-
-	open.subscribe(value => {
-		navOpen = value;
-	});
 </script>
 
 <Nav />
-<main class="stack" data-state={navOpen ? 'nav-expanded' : 'nav-collapsed'}>
+<main class="stack" data-state={$open ? 'nav-expanded' : 'nav-collapsed'}>
 	<h1>Occultum facinus esse potuerit, gaudebit;</h1>
 	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In schola desinis. Mihi, inquam, qui te id ipsum rogavi? Sed in rebus apertissimis nimium longi sumus. Hic ambiguo ludimur. Quid ad utilitatem tantae pecuniae? Age sane, inquam. </p>
 	<p>Sed quid sentiat, non videtis. Inde igitur, inquit, ordiendum est. Illum mallem levares, quo optimum atque humanissimum virum, Cn. <a href='http://loripsum.net/' target='_blank'>Quod totum contra est.</a> <b>Quo plebiscito decreta a senatu est consuli quaestio Cn.</b> <i>Cave putes quicquam esse verius.</i> </p>

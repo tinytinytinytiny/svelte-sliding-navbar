@@ -101,28 +101,22 @@ Nav.svelte
 		import { open } from './stores.js';
 		import links from '$lib/data/links.json';
 
-		let navOpen;
-
-		open.subscribe(value => {
-			navOpen = value;
-		});
-
 		function handleNavToggle() {
-			open.update(n => !n);
+			$open = !$open;
 		}
 	</script>
 
 	<button
 		aria-controls="main-menu"
-		aria-expanded={navOpen}
-		aria-label={navOpen ? 'Close menu' : 'Open menu'}
+		aria-expanded={$open}
+		aria-label={$open ? 'Close menu' : 'Open menu'}
 		class="nav-toggler"
 		on:click={handleNavToggle}
 	>
 	<nav
 		id="main-menu"
 		aria-label="Main menu"
-		data-state={navOpen ? 'nav-expanded' : 'nav-collapsed'}
+		data-state={$open ? 'nav-expanded' : 'nav-collapsed'}
 	>
 	</nav>
 
@@ -131,16 +125,10 @@ Nav.svelte
 	<script>
 		import Nav from '$lib/Nav/Nav.svelte';
 		import { open } from '$lib/Nav/stores.js';
-
-		let navOpen;
-
-		open.subscribe(value => {
-			navOpen = value;
-		});
 	</script>
 
 	<Nav />
-	<main data-state={navOpen ? 'nav-expanded' : 'nav-collapsed'}></main>
+	<main data-state={$open ? 'nav-expanded' : 'nav-collapsed'}></main>
 
 then, adjust css transforms for menu open state:
 
