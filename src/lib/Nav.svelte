@@ -1,5 +1,10 @@
+<script context="module">
+	import { writable } from 'svelte/store';
+
+	export const open = writable(false);
+</script>
+
 <script>
-	import { open } from './stores.js';
 	import links from '$lib/data/links.json';
 
 	function handleNavToggle() {

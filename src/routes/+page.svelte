@@ -1,6 +1,5 @@
 <script>
-	import Nav from '$lib/Nav/Nav.svelte';
-	import { open } from '$lib/Nav/stores.js';
+	import Nav, { open } from '$lib/Nav.svelte';
 </script>
 
 <Nav />

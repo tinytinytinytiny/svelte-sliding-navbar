@@ -89,18 +89,15 @@ at the breakpoint of **50rem** viewport width, the layout stops being a grid and
 ## Interactivity
 use store to share nav component’s open state with the entire page:
 
-stores.js
-
-	import { writable } from 'svelte/store';
-
-	export const open = writable(false);
-
 Nav.svelte
 
-	<script>
-		import { open } from './stores.js';
-		import links from '$lib/data/links.json';
+	<script context="module">
+		import { writable } from 'svelte/store';
 
+		export const open = writable(false);
+	</script>
+
+	<script>
 		function handleNavToggle() {
 			$open = !$open;
 		}
@@ -123,8 +120,7 @@ Nav.svelte
 +page.svelte
 
 	<script>
-		import Nav from '$lib/Nav/Nav.svelte';
-		import { open } from '$lib/Nav/stores.js';
+		import Nav, { open } from '$lib/Nav.svelte';
 	</script>
 
 	<Nav />
