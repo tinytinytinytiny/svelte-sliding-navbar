@@ -14,17 +14,29 @@
 	class="nav-toggler"
 	on:click={handleNavToggle}
 >
-	<svg aria-hidden="true" class="ham hamRotate ham1" viewBox="0 0 100 100" width="48" data-state={$open ? 'close' : 'burger'}>
-		<path class="line top" d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40" />
+	<svg
+		aria-hidden="true"
+		class="ham hamRotate ham1"
+		viewBox="0 0 100 100"
+		width="48"
+		data-state={$open ? 'close' : 'burger'}
+	>
+		<path
+			class="line top"
+			d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"
+		/>
 		<path class="line middle" d="m 30,50 h 40" />
-		<path class="line bottom" d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40" />
+		<path
+			class="line bottom"
+			d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"
+		/>
 	</svg>
 </button>
 <nav id="main-menu" aria-label="Main menu" data-state={$open ? 'nav-expanded' : 'nav-collapsed'}>
 	<div class="nav-inner">
 		<div class="nav-body">
 			<div class="nav-logo">
-				<img src="/favicon.png" width="128" height="128" alt="">
+				<img src="/favicon.png" width="128" height="128" alt="" />
 			</div>
 			<h2>Sliding Navbar Demo</h2>
 			<ul>
@@ -32,9 +44,7 @@
 					<li><a href={url}>{title}</a></li>
 				{/each}
 			</ul>
-			<footer>
-				Copyright (c) 2023 Copyright Holder All Rights Reserved.
-			</footer>
+			<footer>Copyright (c) 2023 Copyright Holder All Rights Reserved.</footer>
 		</div>
 	</div>
 </nav>
@@ -119,7 +129,7 @@
 		background-color: rgba(0, 0, 0, 0.08);
 	}
 
-	.hamRotate[data-state="close"] {
+	.hamRotate[data-state='close'] {
 		transform: rotate(45deg);
 	}
 
@@ -139,11 +149,11 @@
 		stroke-dasharray: 40 180;
 	}
 
-	.ham1[data-state="close"] .top {
+	.ham1[data-state='close'] .top {
 		stroke-dashoffset: -98px;
 	}
 
-	.ham1[data-state="close"] .bottom {
+	.ham1[data-state='close'] .bottom {
 		stroke-dashoffset: -138px;
 	}
 
@@ -155,7 +165,7 @@
 			z-index: 10;
 		}
 
-		nav[data-state="nav-expanded"] {
+		nav[data-state='nav-expanded'] {
 			transform: none;
 		}
 
@@ -169,7 +179,11 @@
 
 		nav::before {
 			background-color: rgba(0, 0, 0, 0.05);
-			background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.7) calc(var(--nav-width) / 2), rgba(0, 0, 0, 0.25) calc(var(--nav-width) * 2));
+			background-image: linear-gradient(
+				90deg,
+				rgba(0, 0, 0, 0.7) calc(var(--nav-width) / 2),
+				rgba(0, 0, 0, 0.25) calc(var(--nav-width) * 2)
+			);
 			content: '';
 			height: 100vh;
 			height: 100lvh;
@@ -180,7 +194,7 @@
 			z-index: -1;
 		}
 
-		nav[data-state="nav-expanded"]::before {
+		nav[data-state='nav-expanded']::before {
 			opacity: 1;
 		}
 
