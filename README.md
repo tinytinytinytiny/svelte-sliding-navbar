@@ -34,14 +34,26 @@ reset all elements to border-box and add transitions:
 ## Layout
 	<body data-sveltekit-preload-data="hover">
 		<div class="layout">
-			<button
-				aria-controls="main-menu"
-				aria-expanded="false"
-				aria-label="Open menu"
-				class="nav-toggler"
-			>
-			</button>
-			<nav id="main-menu" aria-label="Main menu"></nav>
+			<nav aria-label="Main menu">
+				<button
+					aria-controls="main-menu"
+					aria-expanded="false"
+					aria-label="Open menu"
+					class="nav-toggler"
+					type="button"
+				>
+				</button>
+				<div id="main-menu" class="nav-menu"></div>
+			</nav>
+			<main></main>
+		</div>
+	</body>
+
+the `<nav>` can be abstracted into a separate component:
+
+	<body data-sveltekit-preload-data="hover">
+		<div class="layout">
+			<Nav />
 			<main></main>
 		</div>
 	</body>
@@ -56,6 +68,10 @@ the `.layout` class will be a 3-column grid to create a sidebar layout with the 
 	}
 
 	nav {
+		display: contents;
+	}
+
+	.nav-menu {
 		height: 100%;
 		width: var(--nav-width);
 	}
@@ -74,7 +90,7 @@ at the breakpoint of **50rem** viewport width, the layout stops being a grid and
 			display: contents;
 		}
 
-		nav {
+		.nav-menu {
 			position: fixed;
 			top: 0;
 			transform: translateX(calc(-1 * var(--nav-width)));
@@ -103,18 +119,16 @@ Nav.svelte
 		}
 	</script>
 
-	<button
-		aria-controls="main-menu"
-		aria-expanded={$open}
-		aria-label={$open ? 'Close menu' : 'Open menu'}
-		class="nav-toggler"
-		on:click={handleNavToggle}
-	>
-	<nav
-		id="main-menu"
-		aria-label="Main menu"
-		data-state={$open ? 'nav-expanded' : 'nav-collapsed'}
-	>
+	<nav aria-label="Main menu">
+		<button
+			aria-controls="main-menu"
+			aria-expanded={$open}
+			aria-label={$open ? 'Close menu' : 'Open menu'}
+			class="nav-toggler"
+			type="button"
+			on:click={handleNavToggle}
+		>
+		<div id="main-menu" class="nav-menu"></div>
 	</nav>
 
 +page.svelte
@@ -129,11 +143,11 @@ Nav.svelte
 then, adjust css transforms for menu open state:
 
 	@media (max-width: 50rem) {
-		main[data-state="nav-expanded"] {
-			transform: translateX(var(--nav-width));
+		[aria-expanded="true"] + .nav-menu {
+			transform: none;
 		}
 
-		nav[data-state="nav-expanded"] {
-			transform: none;
+		main[data-state="nav-expanded"] {
+			transform: translateX(var(--nav-width));
 		}
 	}

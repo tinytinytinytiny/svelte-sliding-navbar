@@ -12,61 +12,62 @@
 	}
 </script>
 
-<button
-	aria-controls="main-menu"
-	aria-expanded={$open}
-	aria-label={$open ? 'Close menu' : 'Open menu'}
-	class="nav-toggler"
-	on:click={handleNavToggle}
->
-	<svg
-		aria-hidden="true"
-		class="ham hamRotate ham1"
-		viewBox="0 0 100 100"
-		width="48"
-		data-state={$open ? 'close' : 'burger'}
+<nav aria-label="Main menu">
+	<button
+		aria-controls="main-menu"
+		aria-expanded={$open}
+		aria-label={$open ? 'Close menu' : 'Open menu'}
+		class="nav-toggler"
+		type="button"
+		on:click={handleNavToggle}
 	>
-		<path
-			class="line top"
-			d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"
-		/>
-		<path class="line middle" d="m 30,50 h 40" />
-		<path
-			class="line bottom"
-			d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"
-		/>
-	</svg>
-</button>
-<nav id="main-menu" aria-label="Main menu" data-state={$open ? 'nav-expanded' : 'nav-collapsed'}>
-	<div class="nav-inner">
-		<div class="nav-body">
-			<div class="nav-logo">
-				<img src="/favicon.png" width="128" height="128" alt="" />
+		<svg aria-hidden="true" class="hamburger" viewBox="0 0 100 100" width="48">
+			<path
+				class="hamburger__line-top"
+				d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"
+			/>
+			<path d="m 30,50 h 40" />
+			<path
+				class="hamburger__line-bottom"
+				d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"
+			/>
+		</svg>
+	</button>
+	<div class="nav-menu" id="main-menu">
+		<div class="nav-menu__inner">
+			<div class="nav-menu__body">
+				<div class="logo">
+					<img src="/favicon.png" width="128" height="128" alt="" />
+				</div>
+				<h2>Sliding Navbar Demo</h2>
+				<ul>
+					{#each links as { title, url }}
+						<li><a href={url}>{title}</a></li>
+					{/each}
+				</ul>
+				<footer>Copyright (c) 2023 Copyright Holder All Rights Reserved.</footer>
 			</div>
-			<h2>Sliding Navbar Demo</h2>
-			<ul>
-				{#each links as { title, url }}
-					<li><a href={url}>{title}</a></li>
-				{/each}
-			</ul>
-			<footer>Copyright (c) 2023 Copyright Holder All Rights Reserved.</footer>
 		</div>
 	</div>
 </nav>
 
 <style>
 	nav {
+		display: contents;
+	}
+
+	.nav-menu {
 		height: 100%;
 		max-width: 100%;
 		width: var(--nav-width);
 	}
 
-	.nav-inner {
+	.nav-menu__inner {
 		height: 100%;
 		width: 100%;
 	}
 
-	.nav-body {
+	.nav-menu__body {
 		max-height: 100vh;
 		max-height: 100dvh;
 		padding: var(--padding);
@@ -89,25 +90,25 @@
 		z-index: 20;
 	}
 
-	.nav-logo {
+	.logo {
 		background-color: var(--bg);
 	}
 
-	.nav-logo img {
+	.logo img {
 		mix-blend-mode: multiply;
 	}
 
-	nav h2 {
+	h2 {
 		margin-block-start: var(--space-xs);
 	}
 
-	nav ul {
+	ul {
 		list-style: none;
 		padding: 0;
 	}
 
-	nav ul::before,
-	nav footer::before {
+	ul::before,
+	footer::before {
 		content: '';
 		background-color: rgba(0, 0, 0, 0.16);
 		display: block;
@@ -116,7 +117,7 @@
 		width: 100%;
 	}
 
-	nav a {
+	a {
 		color: inherit;
 		display: block;
 		padding-block: calc(var(--space-s) / 2);
@@ -124,21 +125,21 @@
 		text-decoration: none;
 	}
 
-	nav a::before {
+	a::before {
 		content: '';
 		inset: 0 calc(-1 * var(--padding));
 		position: absolute;
 	}
 
-	nav a:hover::before {
+	a:hover::before {
 		background-color: rgba(0, 0, 0, 0.08);
 	}
 
-	.hamRotate[data-state='close'] {
+	[aria-expanded='true'] .hamburger {
 		transform: rotate(45deg);
 	}
 
-	.line {
+	.hamburger > path {
 		fill: none;
 		transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
 		stroke: currentColor;
@@ -146,43 +147,43 @@
 		stroke-linecap: round;
 	}
 
-	.ham1 .top {
+	.hamburger__line-top {
 		stroke-dasharray: 40 139;
 	}
 
-	.ham1 .bottom {
+	.hamburger__line-bottom {
 		stroke-dasharray: 40 180;
 	}
 
-	.ham1[data-state='close'] .top {
+	[aria-expanded='true'] .hamburger__line-top {
 		stroke-dashoffset: -98px;
 	}
 
-	.ham1[data-state='close'] .bottom {
+	[aria-expanded='true'] .hamburger__line-bottom {
 		stroke-dashoffset: -138px;
 	}
 
 	@media (max-width: 50rem) {
-		nav {
+		.nav-menu {
 			position: fixed;
 			top: 0;
 			transform: translateX(calc(-1 * var(--nav-width)));
 			z-index: 10;
 		}
 
-		nav[data-state='nav-expanded'] {
+		[aria-expanded='true'] + .nav-menu {
 			transform: none;
 		}
 
-		.nav-inner {
+		.nav-menu__inner {
 			background-color: var(--bg);
 		}
 
-		.nav-body {
+		.nav-menu__body {
 			padding-block-start: calc(var(--padding) + var(--nav-button-size) + var(--stack-space));
 		}
 
-		nav::before {
+		.nav-menu::before {
 			background-color: rgba(0, 0, 0, 0.05);
 			background-image: linear-gradient(
 				90deg,
@@ -199,7 +200,7 @@
 			z-index: -1;
 		}
 
-		nav[data-state='nav-expanded']::before {
+		[aria-expanded='true'] + .nav-menu::before {
 			opacity: 1;
 		}
 
